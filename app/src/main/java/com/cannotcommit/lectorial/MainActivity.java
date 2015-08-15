@@ -1,9 +1,13 @@
 package com.cannotcommit.lectorial;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,5 +37,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void getFieldInfo(View view) {
+
+        EditText userEditText = (EditText) findViewById(R.id.id_login_edit_text);
+        EditText passwordEditText = (EditText) findViewById(R.id.password_edit_text);
+
+        String idText = userEditText.getText().toString();
+        String passwordText = passwordEditText.getText().toString();
+
+        if (confirmLoginInfo(idText, passwordText)){
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }
+
+
+    }
+
+    private boolean confirmLoginInfo(String email, String password){
+
+        Log.v("MainActivity.java", email);
+        Log.v("MainActivity.java", password);
+
+        return true;
     }
 }
