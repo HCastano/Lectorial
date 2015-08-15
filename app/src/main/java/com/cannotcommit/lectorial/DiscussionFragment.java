@@ -27,7 +27,7 @@ public class DiscussionFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private ViewCourseFragment.OnFragmentInteractionListener mListener;
+  //  private ViewCourseFragment.OnFragmentInteractionListener mListener;
 
     /**
      * Use this factory method to create a new instance of

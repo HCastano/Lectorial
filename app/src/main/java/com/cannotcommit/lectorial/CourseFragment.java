@@ -11,35 +11,42 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.List;
+
 
 public class CourseFragment extends Fragment {
-    private ListView mDiscussionList;
-    private String[] mDiscussionString;
+    private ListView mCoursesList;
     private String mSubject;
 
-    private final String apiURL = "";
-    private final String apiKey = "";
+    private final String apiURL = "https://api.uwaterloo.ca/v2/courses/";
+    private final String apiKey = "444364245f044a73f69a5e3a306a4790";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_course, container, false);
 
-        mDiscussionString = new String[10];
-        for(int i = 0; i < 10; i++){
-            mDiscussionString[i] = "Discussion " + (i+1);
-        }
-        mDiscussionList = (ListView)v.findViewById(R.id.discussion_list);
-        mDiscussionList.setAdapter(new ArrayAdapter<String>(this.getActivity(), R.layout.drawer_list_item, mDiscussionString));
+        mCoursesList = (ListView) v.findViewById(R.id.full_courses_list);
 
         Bundle arguments = getArguments();
         mSubject = (String)arguments.get("subject");
 
-        String urlString = apiURL + "?key=" + apiKey;
-        //new AsyncFetchSubjects(this).execute(urlString);
+        String urlString = apiURL + mSubject + ".xml?key=" + apiKey;
+        new AsyncFetchCatalog(this).execute(urlString);
 
         return v;
     }
 
+    public void displayCourses(List<String> result){
+        String[] mResults = new String[result.size()];
+        if(!result.get(0).equals("No courses found.")) {
+            for (int i = 0; i < result.size(); i++) {
+                mResults[i] = mSubject + " " + result.get(i);
+            }
+        }else {
+            mResults[0] = result.get(0);
+        }
+        mCoursesList.setAdapter(new ArrayAdapter<String>(this.getActivity(), R.layout.subject_row, mResults));
+    }
 
 
 }
