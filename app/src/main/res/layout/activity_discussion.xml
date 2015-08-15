@@ -28,7 +28,8 @@
         android:onClick="messageClick"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/message"
-        android:layout_alignEnd="@+id/message" />
+        android:layout_alignEnd="@+id/message"
+        android:text="Send"/>
 
 
 </RelativeLayout>
