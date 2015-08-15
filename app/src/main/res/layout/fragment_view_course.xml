@@ -3,8 +3,17 @@
     android:layout_height="match_parent"
     tools:context="com.cannotcommit.lectorial.ViewCourseFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Courses From API"
+        android:paddingBottom="20dp"
+        android:textSize="20sp"/>
+    <ListView
+        android:id="@+id/discussion_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
 
 </FrameLayout>
