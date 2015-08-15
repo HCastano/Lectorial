@@ -3,6 +3,7 @@ package com.cannotcommit.lectorial;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -96,6 +97,20 @@ public class HomeActivity extends AppCompatActivity {
         return true;
     }
 
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -107,6 +122,14 @@ public class HomeActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle your other action bar items...
+
 
         return super.onOptionsItemSelected(item);
     }
