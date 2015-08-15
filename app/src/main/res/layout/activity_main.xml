@@ -18,17 +18,18 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="63dp"
         android:textSize="54sp"
-        android:textColor="#000"/>
+        android:textColor="#FFCC00"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Cool tagline here"
+        android:text="Engaging Courses"
         android:id="@+id/textView"
         android:layout_below="@+id/title_text_view"
         android:layout_centerHorizontal="true"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textColor="#FFFF00"/>
 
     <EditText
         android:layout_width="200dp"
@@ -38,7 +39,8 @@
         android:hint="WatIAm ID"
         android:layout_above="@+id/password_edit_text"
         android:layout_alignLeft="@+id/password_edit_text"
-        android:layout_alignStart="@+id/password_edit_text" />
+        android:layout_alignStart="@+id/password_edit_text"
+        android:textColorHint="#FFFF00" />
 
     <EditText
         android:layout_width="200dp"
@@ -49,17 +51,26 @@
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView"
-        android:textColor="#000"
-        android:textStyle="bold"/>
+        android:textColorHint="#FFFF00"
+        android:password="true" />
 
     <Button
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:background="#FFF"
         android:id="@+id/login_button"
         android:text="Login"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="getFieldInfo"/>
+        android:onClick="getFieldInfo"
+        android:layout_marginBottom="10dp"/>
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/login_button"
+        android:layout_toStartOf="@+id/login_button" />
 
 </RelativeLayout>

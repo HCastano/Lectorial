@@ -1,6 +1,7 @@
 package com.cannotcommit.lectorial;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
 
         String idText = userEditText.getText().toString();
         String passwordText = passwordEditText.getText().toString();
+
+        SharedPreferences settings = getSharedPreferences("Username", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("username", idText);
+
+        // Commit the edits!
+        editor.commit();
+
+
 
         if (confirmLoginInfo(idText, passwordText)){
             Intent intent = new Intent(this, HomeActivity.class);
