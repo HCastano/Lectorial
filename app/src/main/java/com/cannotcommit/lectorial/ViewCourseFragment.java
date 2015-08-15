@@ -2,6 +2,7 @@ package com.cannotcommit.lectorial;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,9 +38,10 @@ public class ViewCourseFragment extends Fragment {
                 bundle.putString("subject",((TextView)v.findViewById(R.id.list_textview)).getText().toString() );
                 fragment.setArguments(bundle);
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.drawer_content, fragment)
-                        .commit();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.drawer_content, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
