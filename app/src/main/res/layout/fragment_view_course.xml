@@ -3,20 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.cannotcommit.lectorial.ViewCourseFragment"
-    android:layout_marginTop="60dp">
+    android:layout_marginTop="80dp"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true" >
 
-    <TextView
-        android:id="@+id/allCoursesText"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/search_subjects"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View Courses From API"
+        android:hint="Search"
         android:textSize="20sp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="10dp"/>
+
     <ListView
         android:id="@+id/course_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/allCoursesText">
+        android:layout_below="@id/search_subjects">
 
     </ListView>
 

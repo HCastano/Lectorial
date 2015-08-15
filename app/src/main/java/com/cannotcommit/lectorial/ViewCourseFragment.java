@@ -7,12 +7,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,11 +27,34 @@ public class ViewCourseFragment extends Fragment {
     public final static String apiURL = "https://api.uwaterloo.ca/v2/codes/subjects.xml";
 
     private ListView mCoursesList;
+    private ArrayAdapter<String> mCoursesAdapter;
+    private EditText mSearchSubjects;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_view_course, container, false);
         mCoursesList = (ListView) v.findViewById(R.id.course_list);
+        mSearchSubjects = (EditText) v.findViewById(R.id.search_subjects);
+        mSearchSubjects.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                if(cs.toString().equals("")) ViewCourseFragment.this.mCoursesAdapter.getFilter().filter(cs);;
+                ViewCourseFragment.this.mCoursesAdapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
         mCoursesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> av, View v, int position, long id) {
@@ -56,7 +82,8 @@ public class ViewCourseFragment extends Fragment {
         for(int i = 0; i < result.size(); i++){
             mResults[i] = result.get(i);
         }
-        mCoursesList.setAdapter(new ArrayAdapter<String>(this.getActivity(), R.layout.subject_row, mResults));
+        mCoursesAdapter = new ArrayAdapter<String>(this.getActivity(), R.layout.subject_row, mResults);
+        mCoursesList.setAdapter(mCoursesAdapter);
     }
 
 }
