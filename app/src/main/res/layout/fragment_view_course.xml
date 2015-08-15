@@ -1,19 +1,23 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cannotcommit.lectorial.ViewCourseFragment">
+    tools:context="com.cannotcommit.lectorial.ViewCourseFragment"
+    android:layout_marginTop="60dp">
 
     <TextView
+        android:id="@+id/allCoursesText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View Courses From API"
-        android:paddingBottom="20dp"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"/>
     <ListView
-        android:id="@+id/discussion_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/course_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/allCoursesText">
 
     </ListView>
 
-</FrameLayout>
+</RelativeLayout>

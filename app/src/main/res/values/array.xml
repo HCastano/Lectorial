@@ -2,10 +2,7 @@
 <resources>
     <string-array
         name="drawer_array">
-        <item>SE 101</item>
-        <item>SE 101</item>
-        <item>SE 101</item>
-        <item>SE 101</item>
-        <item>SE 101</item>
+        <item>Find Course</item>
+        <item>Favourites</item>
     </string-array>
 </resources>

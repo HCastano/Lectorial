@@ -9,11 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 public class CourseFragment extends Fragment {
     private ListView mDiscussionList;
     private String[] mDiscussionString;
+    private String mSubject;
+
+    private final String apiURL = "";
+    private final String apiKey = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -26,7 +31,15 @@ public class CourseFragment extends Fragment {
         mDiscussionList = (ListView)v.findViewById(R.id.discussion_list);
         mDiscussionList.setAdapter(new ArrayAdapter<String>(this.getActivity(), R.layout.drawer_list_item, mDiscussionString));
 
+        Bundle arguments = getArguments();
+        mSubject = (String)arguments.get("subject");
+
+        String urlString = apiURL + "?key=" + apiKey;
+        //new AsyncFetchSubjects(this).execute(urlString);
+
         return v;
     }
+
+
 
 }

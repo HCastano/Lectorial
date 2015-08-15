@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // initial fragment
-        Fragment fragment = new CourseFragment();
+        Fragment fragment = new ViewCourseFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.drawer_content, fragment)
@@ -145,14 +145,14 @@ public class HomeActivity extends AppCompatActivity {
     private void selectItem(int position){
         Fragment fragment;
         switch(position){
-            case 1:
-                fragment = new CourseFragment();
+            case 0:
+                fragment = new ViewCourseFragment();
                 break;
-            case 2:
+            case 1:
                 fragment = new ViewCourseFragment();
                 break;
             default:
-                fragment = new CourseFragment();
+                fragment = new ViewCourseFragment();
 
         }
         // Insert the fragment by replacing any existing fragment
