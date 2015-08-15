@@ -2,14 +2,19 @@ package com.cannotcommit.lectorial;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -24,8 +29,22 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // Inflate the "decor.xml"
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mDrawerLayout = (DrawerLayout) inflater.inflate(R.layout.decor, null); // "null" is important.
+
+        // HACK: "steal" the first child of decor view
+        ViewGroup decor = (ViewGroup) getWindow().getDecorView();
+        View child = decor.getChildAt(0);
+        decor.removeView(child);
+        FrameLayout container = (FrameLayout) mDrawerLayout.findViewById(R.id.drawer_content); // This is the container we defined just now.
+        container.addView(child);
+
+        // Make the drawer replace the first child
+        decor.addView(mDrawerLayout);
+
         mDrawerTitles = getResources().getStringArray(R.array.drawer_array);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer);
+       // mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer);
         mDrawerList = (ListView) findViewById(R.id.drawer_list);
         mDrawerListLayout = (LinearLayout)findViewById(R.id.drawer_list_layout);
 
