@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private LinearLayout mDrawerListLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,38 @@ public class HomeActivity extends AppCompatActivity {
                 R.layout.drawer_list_item, mDrawerTitles));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        // initial fragment
+        Fragment fragment = new CourseFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.drawer_content, fragment)
+                .commit();
+
+        mDrawerList.setItemChecked(0, true);
+        setTitle(mDrawerTitles[0]);
+
+        //enable up action in action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
     @Override
@@ -91,6 +125,9 @@ public class HomeActivity extends AppCompatActivity {
             case 1:
                 fragment = new CourseFragment();
                 break;
+            case 2:
+                fragment = new ViewCourseFragment();
+                break;
             default:
                 fragment = new CourseFragment();
 
@@ -105,5 +142,10 @@ public class HomeActivity extends AppCompatActivity {
         mDrawerList.setItemChecked(position, true);
         setTitle(mDrawerTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerListLayout);
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        getSupportActionBar().setTitle(title);
     }
 }

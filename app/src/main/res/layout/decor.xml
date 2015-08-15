@@ -8,8 +8,8 @@
 
     <FrameLayout
         android:id="@+id/drawer_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
 
     <LinearLayout
         android:id="@+id/drawer_list_layout"
@@ -17,6 +17,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:paddingTop="20dp"
         android:orientation="vertical"
         android:layout_gravity="start"
         android:background="#F5F5F5">
