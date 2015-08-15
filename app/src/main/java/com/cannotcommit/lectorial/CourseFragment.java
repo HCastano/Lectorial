@@ -1,6 +1,9 @@
 package com.cannotcommit.lectorial;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -9,6 +12,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,6 +26,7 @@ public class CourseFragment extends Fragment {
     private String mSubject;
     private EditText mSearchCourses;
     private ArrayAdapter<String> mCoursesAdapter;
+    private String shortCourseName[];
 
     private final String apiURL = "https://api.uwaterloo.ca/v2/courses/";
     private final String apiKey = "444364245f044a73f69a5e3a306a4790";
@@ -31,6 +36,15 @@ public class CourseFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_course, container, false);
 
         mCoursesList = (ListView) v.findViewById(R.id.full_courses_list);
+        mCoursesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> av, View v, int position, long id) {
+                Intent intent = new Intent(getActivity(), DiscussionActivity.class);
+                String course = shortCourseName[position];
+                intent.putExtra("course", course);
+                startActivity(intent);
+            }
+        });
 
         mSearchCourses = (EditText) v.findViewById(R.id.search_courses);
         mSearchCourses.addTextChangedListener(new TextWatcher() {
@@ -65,9 +79,11 @@ public class CourseFragment extends Fragment {
 
     public void displayCourses(List<String> result){
         String[] mResults = new String[result.size()];
+        shortCourseName = new String[result.size()];
         if(!result.get(0).equals("No courses found.")) {
             for (int i = 0; i < result.size(); i++) {
                 mResults[i] = mSubject + " " + result.get(i);
+                shortCourseName[i] = mSubject + result.get(i).split("-")[0].trim();
             }
         }else {
             mResults[0] = result.get(0);
