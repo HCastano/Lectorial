@@ -12,19 +12,19 @@ import android.widget.ListView;
 
 
 public class CourseFragment extends Fragment {
-    private ListView mDrawerList;
-    private String[] mDrawerString;
+    private ListView mDiscussionList;
+    private String[] mDiscussionString;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_course, container, false);
 
-        mDrawerString = new String[10];
+        mDiscussionString = new String[10];
         for(int i = 0; i < 10; i++){
-            mDrawerString[i] = "Route Number " + (i+1);
+            mDiscussionString[i] = "Discussion " + (i+1);
         }
-        mDrawerList = (ListView)v.findViewById(R.id.drawer_list);
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this.getActivity(), R.layout.drawer_list_item, mDrawerString));
+        mDiscussionList = (ListView)v.findViewById(R.id.discussion_list);
+        mDiscussionList.setAdapter(new ArrayAdapter<String>(this.getActivity(), R.layout.drawer_list_item, mDiscussionString));
 
         return v;
     }
