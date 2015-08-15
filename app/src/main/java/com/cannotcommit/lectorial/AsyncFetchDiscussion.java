@@ -32,7 +32,7 @@ public class AsyncFetchDiscussion  extends AsyncTask<String, String, String> {
     protected String doInBackground(String... params) {
         String urlString=params[0]; // URL to call
         String resultToDisplay = "";
-
+        System.out.println(urlString);
 
         InputStream in = null;
 
